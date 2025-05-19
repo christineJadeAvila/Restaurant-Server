@@ -33,7 +33,7 @@ export const createProduct = async(productData) => {
     const {rows} = await query(
         `INSERT INTO product (id, name, price, category_id)
         VALUES ($1, $2, $3, $4, $5) RETURNING * `,
-        [id, name, description]
+        [id, name, price, category_id]
     )
     return rows[0]
 }

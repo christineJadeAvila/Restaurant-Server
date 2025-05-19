@@ -6,7 +6,7 @@ env.config()
 const database = new pg.Client({
     user: 'postgres',
     host: 'localhost',
-    database: 'restaurant',
+    database: 'restaurantDB',
     password: "root",
     port: 5432,
 })
