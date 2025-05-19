@@ -14,7 +14,7 @@ export const getProducts = async() => {
 export const createCategory = async(categoryData) => {
     const {categoryId, category_name, description} = categoryData
     const {rows} = await query(
-        `INSERT INTO category (id, name, description)
+        `INSERT INTO category (categoryId, category_name, description)
         VALUES ($1, $2, $3) RETURNING *`,
         [categoryId, category_name, description]
     )
@@ -32,19 +32,19 @@ export const createProduct = async(productData) => {
     const {productId, product_name, price, category_id} = productData 
     const {rows} = await query(
         `INSERT INTO product (productId, product_name, price, category_id)
-        VALUES ($1, $2, $3, $4, $5) RETURNING * `,
+        VALUES ($1, $2, $3, $4) RETURNING * `,
         [productId, product_name, price, category_id]
     )
     return rows[0]
 }
 
 export const updateProduct = async(productId, productData) => {
-    const {productId, product_name, price, category_id} = productData 
+    const {product_name, price, category_id} = productData 
 
     const { rows } = await query(
         `UPDATE product SET productId=$1, product_name=$2, price=$3, category_id=$4 
-        WHERE product_id = $1 RETURNING *`,
-        {productId, product_name, price, category_id}
+        WHERE productId = $1 RETURNING *`,
+        {product_name, price, category_id, productId}
     )
 
     return rows[0]

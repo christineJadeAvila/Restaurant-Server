@@ -16,11 +16,11 @@ export const createSupplier = async(suppliersData) => {
 }
 
 export const updateSupplier = async(supplierID, suppliersData) => {
-     const  {supplierID, supplierName, contactPerson, phone, email, address, supplierType} = suppliersData
+     const  {supplierName, contactPerson, phone, email, address, supplierType} = suppliersData
      const {row} = await query(
         `UPDATE suppliers SET suppliersID=$1, supplierName=$2, contactPerson=$3, phone=$4, email=$5, address=$6, supplierType=$7)
         WHERE suppliersID=$1 RETURNING *`,
-        [supplierID, supplierName, contactPerson, phone, email, address, supplierType]
+        [supplierName, contactPerson, phone, email, address, supplierType, supplierID ]
      )
      return rows[0]
 }
