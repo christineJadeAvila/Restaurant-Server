@@ -29,22 +29,22 @@ export const deleteCategory = async (categoryId) => {
 
 // products 
 export const createProduct = async(productData) => {
-    const {productId, product_name, price, category_id} = productData 
+    const {productId, product_name, price, categoryId} = productData 
     const {rows} = await query(
-        `INSERT INTO product (productId, product_name, price, category_id)
+        `INSERT INTO product (productId, product_name, price, categoryId)
         VALUES ($1, $2, $3, $4) RETURNING * `,
-        [productId, product_name, price, category_id]
+        [productId, product_name, price, categoryId]
     )
     return rows[0]
 }
 
 export const updateProduct = async(productId, productData) => {
-    const {product_name, price, category_id} = productData 
+    const {product_name, price, categoryId} = productData 
 
     const { rows } = await query(
-        `UPDATE product SET productId=$1, product_name=$2, price=$3, category_id=$4 
+        `UPDATE product SET productId=$1, product_name=$2, price=$3, categoryId=$4 
         WHERE productId = $1 RETURNING *`,
-        {product_name, price, category_id, productId}
+        {product_name, price, categoryId, productId}
     )
 
     return rows[0]
@@ -54,4 +54,13 @@ export const deleteProduct = async (productId) => {
     const { rowCount } = await query(`DELETE FROM product WHERE productId = $1`, [productId]);
     return rowCount > 0; 
 };
+
+export const archiveProduct = async (productId) => {
+    const { rowCount } = await query(
+        `UPDATE product SET is_archived = TRUE WHERE productId = $1`,
+        [productId]
+    );
+    return rowCount > 0;
+};
+
 // end products

@@ -11,6 +11,8 @@ router.post('/products', productController.createProduct);
 router.put('/products/:id', productController.updateProduct);
 router.delete('/products/:id', productController.deleteProduct);
 
+router.get('/categories', productController.getCategories);
+
 //supplier routes
 router.get('/suppliers', supplierController.getSuppliers);
 router.post('/suppliers', supplierController.createSupplier);

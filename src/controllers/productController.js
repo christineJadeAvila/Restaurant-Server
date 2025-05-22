@@ -10,6 +10,16 @@ export const getProducts = async(req, res) => {
     }
 }
 
+export const getCategories = async(req, res) => {
+    try {
+        const categories = await productService.getCategories()
+        res.status(200).json(categories)
+    } catch (error) {
+        console.error('Error fetching categories:', err)
+        res.status(500).json({message: 'Internal Server Error'})
+    }
+}
+
 export const createProduct = async (req, res) => {
     try {
         const productData = req.body
