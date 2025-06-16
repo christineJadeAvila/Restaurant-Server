@@ -5,7 +5,7 @@ export const getProducts = async(req, res) => {
         const products = await productService.getProducts()
         res.status(200).json(products)
     } catch (error) {
-        console.error('Error fetching products:', err)
+        console.error('Error fetching products:', error)
         res.status(500).json({message: 'Internal Server Error'})
     }
 }
@@ -15,21 +15,42 @@ export const getCategories = async(req, res) => {
         const categories = await productService.getCategories()
         res.status(200).json(categories)
     } catch (error) {
-        console.error('Error fetching categories:', err)
+        console.error('Error fetching categories:', error)
         res.status(500).json({message: 'Internal Server Error'})
     }
 }
 
+// export const createProduct = async (req, res) => {
+//     try {
+//         const productData = req.body
+//         const image = req.file?.filename
+//         const newProduct = await productService.createProduct({productData, image})
+//         res.status(200).json(newProduct)
+//     } catch (error) { 
+//         console.error('Error adding product:', error)
+//         res.status(500).json({ message: 'Internal Server Error' })
+//     }
+// }
+
 export const createProduct = async (req, res) => {
-    try {
-        const productData = req.body
-        const newProduct = await productService.createProduct(productData)
-        res.status(200).json(newProduct)
-    } catch (err) { 
-        console.error('Error adding product:', err)
-        res.status(500).json({ message: 'Internal Server Error' })
-    }
-}
+  try {
+    const { product_name, price, categoryid } = req.body;
+
+    console.log("CategoryID:", req.body.categoryid);
+
+    const newProduct = await productService.createProduct({
+      product_name,
+      price,
+      categoryid,
+      image: req.file?.filename, // or req.file.filename if you store the filename
+    });
+
+    res.status(201).json(newProduct);
+  } catch (err) {
+    console.error("Error adding product:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 export const updateProduct = async (req, res) => {
     try {
@@ -41,8 +62,8 @@ export const updateProduct = async (req, res) => {
         }
         res.status(200).json(updatedProduct)
 
-    } catch (err) { 
-        console.error('Error updating client:', err)
+    } catch (error) { 
+        console.error('Error updating client:', error)
         res.status(500).json({ message: 'Internal Server Error' })
     }
 };
@@ -57,8 +78,8 @@ export const deleteProduct = async (req, res) => {
 
         res.status(200).send()
 
-    } catch (err) { 
-        console.error('Error deleting product:', err)
+    } catch (error) { 
+        console.error('Error deleting product:', error)
         res.status(500).json({ message: 'Internal Server Error' })
     }
 }

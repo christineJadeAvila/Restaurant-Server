@@ -8,10 +8,13 @@ import productRoutes from "./routes/productRoutes.js"
 const app = express()
 const port = 3000
 
+
 app.use(cors())
 app.use(express.json())
 
 app.use('/api', productRoutes)
+
+app.use("/uploads", express.static("uploads"));
 
 app.listen(port, () => {
     console.log("listening on port 3000")

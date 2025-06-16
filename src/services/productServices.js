@@ -12,39 +12,39 @@ export const getProducts = async() => {
 
 // category
 export const createCategory = async(categoryData) => {
-    const {categoryId, category_name, description} = categoryData
+    const {category_name, description} = categoryData
     const {rows} = await query(
-        `INSERT INTO category (categoryId, category_name, description)
+        `INSERT INTO category (category_name, description)
         VALUES ($1, $2, $3) RETURNING *`,
-        [categoryId, category_name, description]
+        [category_name, description]
     )
     return rows[0]
 }
 
-export const deleteCategory = async (categoryId) => {
-    const { rowCount } = await query(`DELETE FROM category WHERE id = $1`, [categoryId]);
+export const deleteCategory = async (categoryid) => {
+    const { rowCount } = await query(`DELETE FROM category WHERE id = $1`, [categoryid]);
     return rowCount > 0; // Returns true if a row was deleted, false otherwise
 }
 // end category
 
 // products 
 export const createProduct = async(productData) => {
-    const {productId, product_name, price, categoryId} = productData 
+    const {product_name, price, categoryid, image} = productData 
     const {rows} = await query(
-        `INSERT INTO product (productId, product_name, price, categoryId)
+        `INSERT INTO product (product_name, price, categoryid, image)
         VALUES ($1, $2, $3, $4) RETURNING * `,
-        [productId, product_name, price, categoryId]
+        [product_name, price, categoryid, image]
     )
     return rows[0]
 }
 
 export const updateProduct = async(productId, productData) => {
-    const {product_name, price, categoryId} = productData 
+    const {product_name, price, categoryid} = productData 
 
     const { rows } = await query(
-        `UPDATE product SET productId=$1, product_name=$2, price=$3, categoryId=$4 
+        `UPDATE product SET productId=$1, product_name=$2, price=$3, categoryid=$4, image=$5 
         WHERE productId = $1 RETURNING *`,
-        {product_name, price, categoryId, productId}
+        {product_name, price, categoryid, image, productId}
     )
 
     return rows[0]

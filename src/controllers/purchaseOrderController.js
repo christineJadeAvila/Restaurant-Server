@@ -4,7 +4,7 @@ export const getOrders = async(req, res) => {
     try {
         const orders = await purchaseOrderService.getOrders()
         res.status(200).json(orders)
-    } catch (error) {
+    } catch (err) {
         console.error('Error fetching Orders:', err)
         res.status(500).json({message: 'Internal Server Error'})
     }
@@ -23,9 +23,9 @@ export const createOrder = async (req, res) => {
 
 export const updateOrder = async (req, res) => {
     try {
-        const purchaseID = req.params.id
+        const purchaseid = req.params.id
         const ordersData = req.body
-        const updatedOrder = await purchaseOrderService.updateOrder(purchaseID, ordersData);
+        const updatedOrder = await purchaseOrderService.updateOrder(purchaseid, ordersData);
         if (!updatedOrder) {
             return res.status(404).json({ message: 'Order not found' })
         }
@@ -39,8 +39,8 @@ export const updateOrder = async (req, res) => {
 
 export const deleteOrder = async (req, res) => {
     try {
-        const purchaseID = req.params.id
-        const deleted = await purchaseOrderService.deleteOrder(purchaseID)
+        const purchaseid = req.params.id
+        const deleted = await purchaseOrderService.deleteOrder(purchaseid)
         if (!deleted) {
             return res.status(404).json({ message: 'Product not found' })
         }

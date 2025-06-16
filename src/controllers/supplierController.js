@@ -4,7 +4,7 @@ export const getSuppliers = async(req, res) => {
     try {
         const suppliers = await supplierServices.getSuppliers()
         res.status(200).json(suppliers)
-    } catch (error) {
+    } catch (err) {
         console.error('Error fetching Suppliers:', err)
         res.status(500).json({message: 'Internal Server Error'})
     }
@@ -46,7 +46,6 @@ export const deleteSupplier = async (req, res) => {
         }
 
         res.status(200).send()
-
     } catch (err) { 
         console.error('Error deleting Supplier:', err)
         res.status(500).json({ message: 'Internal Server Error' })
