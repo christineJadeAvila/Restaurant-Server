@@ -1,12 +1,12 @@
-# 🍽️ Restaurant Server (Backend API)
+# Restaurant Server (Backend API)
 
 This is the backend REST API for the **Restaurant POS and Inventory Management System**, built using **Node.js**, **Express.js**, and **PostgreSQL**. It powers a restaurant's point-of-sale operations, product inventory, supplier management, and payment processing features.
 
-> 🔧 This project is part of my personal portfolio and complements a React-based frontend.
+> This project is part of my personal portfolio and complements a React-based frontend.
 
 ---
 
-## 🧠 Overview
+## Overview
 
 This API handles:
 - Authentication and user roles (Admin, Cashier)
@@ -18,7 +18,7 @@ This API handles:
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Backend:** Node.js, Express.js  
 - **Database:** PostgreSQL (via pgAdmin)  
@@ -28,5 +28,5 @@ This API handles:
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
